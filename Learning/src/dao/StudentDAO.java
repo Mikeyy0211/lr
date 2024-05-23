@@ -36,12 +36,15 @@ public class StudentDAO extends DAO {
     public boolean addStudent(Student student) {
         String sql = "INSERT INTO tblStudent (fullName, dob, phone, email) VALUES (?, ?, ?, ?)";
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, student.getFullName());
             ps.setDate(2, new java.sql.Date(student.getDob().getTime()));
             ps.setString(3, student.getPhone());
             ps.setString(4, student.getEmail());
             int result = ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            student.setId(rs.getInt(1));
+
             return result > 0;
         } catch (SQLException e) {
             e.printStackTrace();

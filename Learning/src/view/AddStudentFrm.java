@@ -3,18 +3,20 @@ package view;
 import dao.StudentDAO;
 import model.Student;
 import model.User;
-import main.MainApplication;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AddStudentFrm extends JFrame implements ActionListener {
     private JTextField txtStudentID;
     private JTextField txtFullName;
     private JTextField txtAge;
     private JTextField txtEmail;
-    private JTextField txtAddress;
+    private JTextField txtPhone;
     private JButton btnSave;
     private JButton btnCancel;
     private User user;
@@ -31,12 +33,6 @@ public class AddStudentFrm extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel panel = new JPanel();
-        panel.add(new JLabel("Student ID:"));
-        txtStudentID = new JTextField(20);
-        panel.add(txtStudentID);
-        add(panel);
-
-        panel = new JPanel();
         panel.add(new JLabel("Full Name:"));
         txtFullName = new JTextField(20);
         panel.add(txtFullName);
@@ -55,9 +51,9 @@ public class AddStudentFrm extends JFrame implements ActionListener {
         add(panel);
 
         panel = new JPanel();
-        panel.add(new JLabel("Address:"));
-        txtAddress = new JTextField(20);
-        panel.add(txtAddress);
+        panel.add(new JLabel("Phone:"));
+        txtPhone = new JTextField(20);
+        panel.add(txtPhone);
         add(panel);
 
         btnSave = new JButton("Save");
@@ -74,7 +70,22 @@ public class AddStudentFrm extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnSave) {
-            // Implement save functionality here
+            Student student = new Student();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date dob = null;
+            try {
+                dob = sdf.parse(txtAge.getText());
+            } catch (ParseException ex) {
+                throw new RuntimeException(ex);
+            }
+            student.setDob(dob);
+            student.setEmail(txtEmail.getText());
+            student.setFullName(txtFullName.getText());
+            student.setPhone(txtPhone.getText());
+            studentDAO.addStudent(student);
+
+            (new SearchProgramFrm(user, student)).setVisible(true);
+            dispose();
         } else if (e.getSource() == btnCancel) {
             (new SearchStudentFrm(user)).setVisible(true);
             dispose();

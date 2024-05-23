@@ -2,6 +2,7 @@ package view;
 
 import dao.ProgramDAO;
 import model.Program;
+import model.Student;
 import model.User;
 import main.MainApplication;
 
@@ -14,14 +15,15 @@ public class SearchProgramFrm extends JFrame implements ActionListener {
     private JButton btnSearch;
     private JTable tblListProgram;
     private User user;
+    private Student student;
     private ProgramDAO programDAO;
     private MainApplication mainApp;
 
-    public SearchProgramFrm(User user, ProgramDAO programDAO, MainApplication mainApp) {
+    public SearchProgramFrm(User user, Student student) {
         super("Search Program");
         this.user = user;
-        this.programDAO = programDAO;
-        this.mainApp = mainApp;
+        this.student = student;
+        this.programDAO = new ProgramDAO();
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setSize(600, 400);

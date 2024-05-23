@@ -17,14 +17,12 @@ public class SearchSubjectClassFrm extends JFrame implements ActionListener {
     private User user;
     private Program program;
     private SubjectClassDAO subjectClassDAO;
-    private MainApplication mainApp;
 
-    public SearchSubjectClassFrm(User user, Program program, SubjectClassDAO subjectClassDAO, MainApplication mainApp) {
+    public SearchSubjectClassFrm(User user, Program program) {
         super("Search Subject Class");
         this.user = user;
         this.program = program;
-        this.subjectClassDAO = subjectClassDAO;
-        this.mainApp = mainApp;
+        this.subjectClassDAO = new SubjectClassDAO();
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setSize(600, 400);
@@ -50,8 +48,7 @@ public class SearchSubjectClassFrm extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnSearch) {
-            int programId = program.getId();
-            SubjectClass[] subjectClasses = subjectClassDAO.searchAvailableSubjectClass(programId);
+            SubjectClass[] subjectClasses = subjectClassDAO.searchAvailableSubjectClass(program);
             // Update your table model with the search results
         }
     }
