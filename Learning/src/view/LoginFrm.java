@@ -16,10 +16,9 @@ public class LoginFrm extends JFrame implements ActionListener {
     private UserDAO userDAO;
     private MainApplication mainApp;
 
-    public LoginFrm(UserDAO userDAO, MainApplication mainApp) {
+    public LoginFrm() {
         super("Login");
-        this.userDAO = userDAO;
-        this.mainApp = mainApp;
+        this.userDAO = new UserDAO();
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setSize(400, 200);
@@ -52,10 +51,8 @@ public class LoginFrm extends JFrame implements ActionListener {
             user.setUsername(txtUsername.getText());
             user.setPassword(new String(txtPassword.getPassword()));
 
-            User loggedInUser = userDAO.checkLogin(user);
-            if (loggedInUser != null) {
-                mainApp.setUser(loggedInUser);
-                mainApp.showReceptionistHome();
+            if (userDAO.checkLogin(user)) {
+                (new ReceptionistHomeFrm(user)).setVisible(true);
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Incorrect username or password.");

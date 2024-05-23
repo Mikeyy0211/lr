@@ -19,13 +19,11 @@ public class AddStudentFrm extends JFrame implements ActionListener {
     private JButton btnCancel;
     private User user;
     private StudentDAO studentDAO;
-    private MainApplication mainApp;
 
-    public AddStudentFrm(User user, StudentDAO studentDAO, MainApplication mainApp) {
+    public AddStudentFrm(User user) {
         super("Add Student");
         this.user = user;
-        this.studentDAO = studentDAO;
-        this.mainApp = mainApp;
+        this.studentDAO = new StudentDAO();
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setSize(400, 400);
@@ -78,7 +76,7 @@ public class AddStudentFrm extends JFrame implements ActionListener {
         if (e.getSource() == btnSave) {
             // Implement save functionality here
         } else if (e.getSource() == btnCancel) {
-            mainApp.showSearchStudent();
+            (new SearchStudentFrm(user)).setVisible(true);
             dispose();
         }
     }

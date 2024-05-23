@@ -12,12 +12,11 @@ public class ReceptionistHomeFrm extends JFrame implements ActionListener {
     private JButton btnRegistration;
     private JButton btnCancelRegistration;
     private User user;
-    private MainApplication mainApp;
 
-    public ReceptionistHomeFrm(User user, MainApplication mainApp) {
+
+    public ReceptionistHomeFrm(User user) {
         super("Receptionist Home");
         this.user = user;
-        this.mainApp = mainApp;
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setSize(400, 300);
@@ -42,7 +41,8 @@ public class ReceptionistHomeFrm extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnRegistration) {
-            mainApp.showSearchStudent();
+            (new SearchStudentFrm(user)).setVisible(true);
+            dispose();
         } else if (e.getSource() == btnCancelRegistration) {
             // Handle cancel registration logic here
         }

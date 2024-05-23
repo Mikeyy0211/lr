@@ -7,18 +7,17 @@ public class ClassRegistration implements Serializable {
     private int id;
     private Date registerDate;
     private String note;
-    private int subjectClassId;
-    private int invoiceId;
+    private SubjectClass subjectClass;
 
     public ClassRegistration() {
         super();
     }
 
-    public ClassRegistration(Date registerDate, String note, int subjectClassId, int invoiceId) {
+    public ClassRegistration(int id, Date registerDate, String note, SubjectClass subjectClass) {
+        this.id = id;
         this.registerDate = registerDate;
         this.note = note;
-        this.subjectClassId = subjectClassId;
-        this.invoiceId = invoiceId;
+        this.subjectClass = subjectClass;
     }
 
     public int getId() {
@@ -45,19 +44,11 @@ public class ClassRegistration implements Serializable {
         this.note = note;
     }
 
-    public int getSubjectClassId() {
-        return subjectClassId;
+    public SubjectClass getSubjectClass() {
+        return subjectClass;
     }
 
-    public void setSubjectClassId(int subjectClassId) {
-        this.subjectClassId = subjectClassId;
-    }
-
-    public int getInvoiceId() {
-        return invoiceId;
-    }
-
-    public void setInvoiceId(int invoiceId) {
-        this.invoiceId = invoiceId;
+    public void setSubjectClass(SubjectClass subjectClass) {
+        this.subjectClass = subjectClass;
     }
 }

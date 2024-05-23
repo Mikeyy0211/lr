@@ -7,18 +7,18 @@ public class Program implements Serializable {
     private String name;
     private String type;
     private String description;
-    private int levelId;
+    private Level level;
 
     public Program() {
         super();
     }
 
-    public Program(String name, String type, String description, int levelId) {
-        super();
+    public Program(int id, String name, String type, String description, Level level) {
+        this.id = id;
         this.name = name;
         this.type = type;
         this.description = description;
-        this.levelId = levelId;
+        this.level = level;
     }
 
     public int getId() {
@@ -53,11 +53,11 @@ public class Program implements Serializable {
         this.description = description;
     }
 
-    public int getLevelId() {
-        return levelId;
+    public Level getLevel() {
+        return level;
     }
 
-    public void setLevelId(int levelId) {
-        this.levelId = levelId;
+    public void setLevel(Level level) {
+        this.level = level;
     }
 }

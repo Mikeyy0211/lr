@@ -14,13 +14,11 @@ public class InvoiceFrm extends JFrame implements ActionListener {
     private JButton btnBack;
     private Invoice invoice;
     private InvoiceDAO invoiceDAO;
-    private MainApplication mainApp;
 
-    public InvoiceFrm(Invoice invoice, InvoiceDAO invoiceDAO, MainApplication mainApp) {
+    public InvoiceFrm(Invoice invoice) {
         super("Invoice");
         this.invoice = invoice;
-        this.invoiceDAO = invoiceDAO;
-        this.mainApp = mainApp;
+        this.invoiceDAO = new InvoiceDAO();
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setSize(600, 400);
@@ -39,7 +37,7 @@ public class InvoiceFrm extends JFrame implements ActionListener {
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainApp.showReceptionistHome();
+                (new ReceptionistHomeFrm(invoice.getUser())).setVisible(true);
                 dispose();
             }
         });
@@ -53,7 +51,7 @@ public class InvoiceFrm extends JFrame implements ActionListener {
         if (e.getSource() == btnSave) {
             if (invoiceDAO.saveInvoice(invoice)) {
                 JOptionPane.showMessageDialog(this, "Invoice saved successfully!");
-                mainApp.showReceptionistHome();
+                (new ReceptionistHomeFrm(invoice.getUser())).setVisible(true);
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Failed to save invoice!");

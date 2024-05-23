@@ -8,18 +8,18 @@ public class SubjectClass implements Serializable {
     private String name;
     private Date startTime;
     private Date endTime;
-    private int programId;
+    private Program program;
 
     public SubjectClass() {
         super();
     }
 
-    public SubjectClass(String name, Date startTime, Date endTime, int programId) {
-        super();
+    public SubjectClass(int id, String name, Date startTime, Date endTime, Program program) {
+        this.id = id;
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.programId = programId;
+        this.program = program;
     }
 
     public int getId() {
@@ -54,11 +54,11 @@ public class SubjectClass implements Serializable {
         this.endTime = endTime;
     }
 
-    public int getProgramId() {
-        return programId;
+    public Program getProgram() {
+        return program;
     }
 
-    public void setProgramId(int programId) {
-        this.programId = programId;
+    public void setProgram(Program program) {
+        this.program = program;
     }
 }

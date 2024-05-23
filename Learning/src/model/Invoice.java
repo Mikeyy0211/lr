@@ -8,19 +8,20 @@ public class Invoice implements Serializable {
     private int id;
     private Date paymentDate;
     private String paymentType;
-    private int studentID;
-    private int tblUserid;
+    private Student student;
+    private User user;
     private List<ClassRegistration> listClassRegistration;
 
     public Invoice() {
         super();
     }
 
-    public Invoice(Date paymentDate, String paymentType, int studentID, int tblUserid, List<ClassRegistration> listClassRegistration) {
+    public Invoice(int id, Date paymentDate, String paymentType, Student student, User user, List<ClassRegistration> listClassRegistration) {
+        this.id = id;
         this.paymentDate = paymentDate;
         this.paymentType = paymentType;
-        this.studentID = studentID;
-        this.tblUserid = tblUserid;
+        this.student = student;
+        this.user = user;
         this.listClassRegistration = listClassRegistration;
     }
 
@@ -48,20 +49,20 @@ public class Invoice implements Serializable {
         this.paymentType = paymentType;
     }
 
-    public int getStudentID() {
-        return studentID;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
-    public void setStudentID(int studentID) {
-        this.studentID = studentID;
+    public Student getStudent() {
+        return student;
     }
 
-    public int getTblUserid() {
-        return tblUserid;
+    public User getUser() {
+        return user;
     }
 
-    public void setTblUserid(int tblUserid) {
-        this.tblUserid = tblUserid;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<ClassRegistration> getListClassRegistration() {

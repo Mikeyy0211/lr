@@ -16,13 +16,11 @@ public class SearchStudentFrm extends JFrame implements ActionListener {
     private JTable tblListStudent;
     private User user;
     private StudentDAO studentDAO;
-    private MainApplication mainApp;
 
-    public SearchStudentFrm(User user, StudentDAO studentDAO, MainApplication mainApp) {
+    public SearchStudentFrm(User user) {
         super("Search Student");
         this.user = user;
-        this.studentDAO = studentDAO;
-        this.mainApp = mainApp;
+        this.studentDAO = new StudentDAO();
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setSize(600, 400);
@@ -54,7 +52,9 @@ public class SearchStudentFrm extends JFrame implements ActionListener {
         if (e.getSource() == btnSearch) {
             // Implement search functionality here
         } else if (e.getSource() == btnAddStudent) {
-            mainApp.showAddStudent();
+//            mainApp.showAddStudent();
+            (new AddStudentFrm(user)).setVisible(true);
+            dispose();
         }
     }
 }
